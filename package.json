@@ -1,7 +1,7 @@
 {
   "name": "actionsflow",
   "version": "0.1.0",
-  "description": "Common usefull github actions which can copy and paste. (Need add related secrets)",
+  "description": "Common useful github actions which can copy and paste. (Need add related secrets)",
   "main": "index.js",
   "scripts": {
     "git-push": "cd ../yx-env && git-push.sh actionsflow"
