@@ -8,6 +8,8 @@ jobs:
   repo-sync:
     env:
       dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+      dst_token: ${{ secrets.GITEE_TOKEN }}
+      repo_name: ${{ secrets.GITEE_REPO_NAME }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +18,7 @@ jobs:
 
       - name: sync github -> gitee
         uses: Yikun/hub-mirror-action@master
-        if: env.dst_key
+        if: env.dst_key && env.dst_token && env.repo_name
         with:
           # 必选，需要同步的Github用户（源）
           src: github/gyx8899
