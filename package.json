@@ -1,0 +1,25 @@
+{
+  "name": "actionsflow",
+  "version": "0.1.0",
+  "description": "Common usefull github actions which can copy and paste. (Need add related secrets)",
+  "main": "index.js",
+  "scripts": {
+    "git-push": "cd ../yx-env && git-push.sh actionsflow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gyx8899/actionsflow.git"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "workflows",
+    "yml"
+  ],
+  "author": "steper <gyx8899@126.com> (http://github.com/gyx8899)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gyx8899/actionsflow/issues"
+  },
+  "homepage": "https://github.com/gyx8899/actionsflow#readme"
+}
