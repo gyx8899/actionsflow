@@ -7,7 +7,7 @@
 ### Action: Sync GitHub to Gitee
 Github 仓库每一次提交后，通过 Github Action 自动将仓库同步到 Gitee 上。
 
-点击上代码[sync2gitee.yml](./.github/workflows/sync2gitee.yml)
+点击上代码 [sync2gitee.yml](./.github/workflows/sync2gitee.yml)
 
 #### 步骤：
 
