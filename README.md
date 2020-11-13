@@ -11,8 +11,10 @@ Github 仓库每一次提交后，通过 Github Action 自动将仓库同步到 
 
 #### 步骤：
 
-- 需要添加 3 个 secrets:
+- 在个人 Github 需要同步的仓库上添加 3 个 secrets: (Setting -> Secrets -> New repository secret)
 
     - `GITEE_USER`，比如个人的 Gitee user: [steper](https://gitee.com/steper)
     - `GITEE_PRIVATE_KEY`，[Gitee公钥对应的私钥](https://gitee.com/profile/sshkeys)
     - `GITEE_TOKEN`，[Gitee对应的用于创建仓库的token](https://gitee.com/profile/personal_access_tokens)
+
+- 在 Github 仓库上提交改动（如修改 README.md），查看 Github Actions 的运行，并到 [Gitee](https://gitee.com/) 上对应仓库验证是否同步成功。
