@@ -1,6 +1,19 @@
 # Actions flow
 认识到 Github Actions 的强大和便捷后，忍不住要搞一些小轮子（小动作）。
 
+## Secrets - 基础
+
+### Github: `GITHUB_TOKEN`
+If you choose github_token, this token is auto created when workflow launches. No extra operation is needed.
+
+### Github: `PERSONAL_TOKEN`
+- 创建一个个人的 [Access Token](https://docs.github.com/cn/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token).
+- 添加一个 `token` 作为一个 [repo secret](https://docs.github.com/cn/free-pro-team@latest/actions/reference/encrypted-secrets).
+
+> Secret name: `PERSONAL_TOKEN`
+>
+> Secret value: `<token>`
+
 ## Actions
 站在巨人的肩膀上到底有多香，期待不如行动。
 
@@ -21,7 +34,7 @@ Github 仓库每一次提交后，通过 Github Action 自动将仓库同步到 
 
 #### 示例：
 Github 仓库 Action [gyx8899/blog](https://github.com/gyx8899/blog/actions)
-Gitee 仓库 [steper/blog]()
+Gitee 仓库 [steper/blog](https://gitee.com/steper/blog)
 
 ### Action: gitbook publish to gh-pages
 
