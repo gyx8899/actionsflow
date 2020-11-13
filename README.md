@@ -18,3 +18,13 @@ Github 仓库每一次提交后，通过 Github Action 自动将仓库同步到 
     - `GITEE_TOKEN`，[Gitee对应的用于创建仓库的token](https://gitee.com/profile/personal_access_tokens)
 
 - 在 Github 仓库上提交改动（如修改 README.md），查看 Github Actions 的运行，并到 [Gitee](https://gitee.com/) 上对应仓库验证是否同步成功。
+
+#### 示例：
+Github 仓库 Action [gyx8899/blog](https://github.com/gyx8899/blog/actions)
+Gitee 仓库 [steper/blog]()
+
+### Action: gitbook publish to gh-pages
+
+[Publish Gitbook · Actions · GitHub Marketplace](https://github.com/marketplace/actions/publish-gitbook)
+
+> 官方介绍非常详细，直接收录。
