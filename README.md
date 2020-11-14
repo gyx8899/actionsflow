@@ -49,3 +49,14 @@ Gitee 仓库 [steper/blog](https://gitee.com/steper/blog)
 [Publish Gitbook · Actions · GitHub Marketplace](https://github.com/marketplace/actions/publish-gitbook)
 
 > 官方介绍非常详细，直接收录。
+
+## 发现的技巧
+
+- `on push` 状态下，过滤不必要的改动提交，如提交信息中包含`[build]`的时候才执行 Action，示例如下
+
+```yaml
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, '[build]')"
+```
