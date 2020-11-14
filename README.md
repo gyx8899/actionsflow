@@ -59,4 +59,7 @@ jobs:
   format:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, '[build]')"
+
+  # 取反的情况
+  # if: "! contains(github.event.head_commit.message, 'wip')"
 ```
