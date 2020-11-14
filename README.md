@@ -20,15 +20,23 @@ If you choose github_token, this token is auto created when workflow launches. N
 ### Action: Sync GitHub to Gitee
 Github 仓库每一次提交后，通过 Github Action 自动将仓库同步到 Gitee 上。
 
-点击上代码 [sync2gitee.yml](./.github/workflows/sync2gitee.yml)
+点击上代码 [sync2gitee.yml](./workflows/sync2gitee.yml)
 
 #### 步骤：
 
 - 在个人 Github 需要同步的仓库上添加 3 个 secrets: (Setting -> Secrets -> New repository secret)
 
     - `GITEE_USER`，比如个人的 Gitee user: [steper](https://gitee.com/steper)
-    - `GITEE_PRIVATE_KEY`，[Gitee公钥对应的私钥](https://gitee.com/profile/sshkeys)
-    - `GITEE_TOKEN`，[Gitee对应的用于创建仓库的token](https://gitee.com/profile/personal_access_tokens)
+    - `GITEE_PRIVATE_KEY`，获取方法(如果已有，直接设置) - [Gitee公钥对应的私钥](https://gitee.com/profile/sshkeys)
+        新建 private key 方法：
+        - [生成 SSH 公钥](https://gitee.com/help/articles/4181#article-header0)
+        - [将 SSH 公钥添加到 Gitee 公钥](https://gitee.com/profile/sshkeys)
+        - 同时将公钥添加到 Github 项目的 secrets 中;
+    - `GITEE_TOKEN`，获取方法 - [Gitee对应的用于创建仓库的token](https://gitee.com/profile/personal_access_tokens)
+        新建 token 方法：
+        - 点击上面的链接并登录 Gitee, 点击“生成新令牌”，
+        - 添加描述，比如用处 - Github 仓库同步到 Gitee；
+        - 权限默认全选，点击提交，显示出生成的 token 值；（注意保存，需要填到 Github 的 secrets 中）
 
 - 在 Github 仓库上提交改动（如修改 README.md），查看 Github Actions 的运行，并到 [Gitee](https://gitee.com/) 上对应仓库验证是否同步成功。
 
