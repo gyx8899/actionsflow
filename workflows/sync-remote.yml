@@ -1,35 +1,42 @@
-# 通过 Github action， 在仓库的每一次 commit 后自动同步到 Gitee 上
-name: sync2gitee
+# 通过 Github action， 定期或手动 merge remote 仓库
+name: merge-remote
 on:
   schedule:
-    # actually, ~5 minutes is the highest
-    # effective frequency you will get
     - cron:  '0 1 * * *'
+  workflow_dispatch:
+
   jobs:
-    merge:
+    build:
+
+      name: Merge remote repo
       env:
         repo_key: ${{ secrets.REMOTE_REPO_URL }}
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v2
-        - name: Merge upstream
-          if: env.repo_key
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            persist-credentials: false
+
+        - name: Setup git config
+          if: env.repo_url
           run: |
-            git config --global user.name 'Github Action'
-            git config --global user.email ''
-      # "git checkout master" is unnecessary, already here by default
+            # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+            git config --global user.name 'Github Actions Bot'
+            git config --global user.email '<>'
+
+        - name: Merge upstream
+          if: env.repo_url
+          run: |
             git pull --unshallow
-      # this option is very important, you would get
-      # complains about unrelated histories without it.
-      # (but actions/checkout@v2 can also be instructed
-      # to fetch all git depth right from the start)
-      # 添加上游仓库如果是其他上游仓库自行修改
             git remote add upstream '${{ secrets.REMOTE_REPO_URL }}'
             git fetch upstream
-            # Neither forget the -b opt,
-            # the feature/x ref is ambiguous at this stage
             git checkout master
             git merge --no-edit upstream/master --allow-unrelated-histories
-                 git add .
-                 git commit -m "Sync from '${{ secrets.REMOTE_REPO_URL }}'"
+
+        - name: Commit
+          if: env.repo_url
+          run: |
+            git add .
+            git commit -m ":repeat: Sync from '${{ secrets.REMOTE_REPO_URL }}'"
             git push origin master
