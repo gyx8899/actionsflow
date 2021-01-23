@@ -1,4 +1,7 @@
 # 通过 Github action， 定期或手动 merge remote 仓库
+# 1. 设定 schedule
+# 2. 添加 Secrets: REMOTE_REPO_URL
+# 3. 检查 Action 的免费时长是否充足
 name: merge-remote
 on:
   schedule:
@@ -10,7 +13,7 @@ on:
 
       name: Merge remote repo
       env:
-        repo_key: ${{ secrets.REMOTE_REPO_URL }}
+        repo_url: ${{ secrets.REMOTE_REPO_URL }}
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
