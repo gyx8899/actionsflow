@@ -7,39 +7,39 @@ on:
   schedule:
     - cron:  '0 1 * * *'
   workflow_dispatch:
+jobs:
+  build:
+    name: Merge remote repo
+    env:
+      repo_url: ${{ secrets.REMOTE_REPO_URL }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
 
-  jobs:
-    build:
+      - name: Setup git config
+        if: env.repo_url
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config --global user.name 'Github Actions Bot'
+          git config --global user.email '<>'
+          git config --global pull.ff only
 
-      name: Merge remote repo
-      env:
-        repo_url: ${{ secrets.REMOTE_REPO_URL }}
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-          with:
-            persist-credentials: false
+      - name: Merge upstream
+        if: env.repo_url
+        run: |
+          git pull --unshallow
+          git remote add upstream '${{ secrets.REMOTE_REPO_URL }}'
+          git fetch upstream
+          git checkout master
+          git merge --no-edit upstream/master --allow-unrelated-histories
 
-        - name: Setup git config
-          if: env.repo_url
-          run: |
-            # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-            git config --global user.name 'Github Actions Bot'
-            git config --global user.email '<>'
-
-        - name: Merge upstream
-          if: env.repo_url
-          run: |
-            git pull --unshallow
-            git remote add upstream '${{ secrets.REMOTE_REPO_URL }}'
-            git fetch upstream
-            git checkout master
-            git merge --no-edit upstream/master --allow-unrelated-histories
-
-        - name: Commit
-          if: env.repo_url
-          run: |
-            git add .
-            git commit -m ":repeat: Sync from '${{ secrets.REMOTE_REPO_URL }}'"
-            git push origin master
+      - name: Commit
+        if: env.repo_url
+        run: |
+          git add .
+          git commit -m ":repeat: Sync from '${{ secrets.REMOTE_REPO_URL }}'"
+          git push origin master
