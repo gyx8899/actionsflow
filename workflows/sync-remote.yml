@@ -2,11 +2,20 @@
 # 1. 设定 schedule
 # 2. 添加 Secrets: REMOTE_REPO_URL
 # 3. 检查 Action 的免费时长是否充足
-name: merge-remote
+# Note: 新的项目主干是 main, 需要更新 master 为 main
+  # git checkout master，
+  # git merge --no-edit upstream/master
+  # git push origin master
+name: merge_remote
 on:
-  schedule:
-    - cron:  '0 1 * * *'
   workflow_dispatch:
+  schedule:
+  - cron:  '10 0 */11 * *'
+  watch:
+    types: started
+  repository_dispatch:
+    types: merge_remote
+
 jobs:
   build:
     name: Merge remote repo
