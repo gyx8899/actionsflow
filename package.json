@@ -4,7 +4,7 @@
   "description": "Common useful github actions which can copy and paste. (Need add related secrets)",
   "main": "index.js",
   "scripts": {
-    "git-push": "cd ../yx-env && git-push.sh actionsflow"
+    "git-push": "cd ../yx-env && npm run git:push -- --1=actionsflow"
   },
   "repository": {
     "type": "git",

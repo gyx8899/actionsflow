@@ -1,0 +1,27 @@
+# 注意运行时，需要放置文件到项目根目录的 .github/workflows/ 下才能正常识别并运行
+name: hello-world-example
+on:
+  # 触发事件
+  push:
+  # 每次 push 推送触发，可添加更详细的条件，如：分支branches、tag等
+jobs:
+  # 任务名 
+  say-hello:
+    # 指定机器环境
+    runs-on: ubuntu-latest
+    # 执行命令列表
+    steps:
+      -
+        name: Say Hello
+        # 单行系统 shell 命令
+        run: echo "Hello world!"
+      -
+        name: Do stuff
+        # 使用管道符，执行多行命令
+        run: |
+          echo "Step 1..."
+          echo "Step 2..."
+          echo "Step 3..."
+      -
+        name: Say Goodbye
+        run: echo "Goodbye!"
