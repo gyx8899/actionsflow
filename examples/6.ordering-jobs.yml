@@ -1,0 +1,31 @@
+name: parallel-jobs
+on:
+  push:
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Doing work parallel with job2"
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Doing work parallel with job1"
+  job3:
+    runs-on: ubuntu-latest
+    # 设置依赖
+    needs: job1
+    steps:
+      - run: echo "job1 done, running job3"
+  job4:
+    runs-on: ubuntu-latest
+    # 设置依赖
+    needs: [job2, job3]
+    steps:
+      - run: echo "job2 & job3 done, running job4"
+  job5:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    # 设置依赖
+    needs: job1
+    steps:
+      - run: echo "job1 completed with status ${{ needs.job1.result }}, running job5"
